@@ -1,6 +1,18 @@
 .grid-box {
   background-color: rgb(248, 244, 244);
   border: 2px solid black;
-  width: 52px;
-  height: 52px;
+  max-width: 50px;
+  max-height: 50px;
+  padding: 5px;
+}
+
+.box-input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  background-color: rgba(33, 5, 5, 0);
+  border: none;
+  padding: none;
+  outline: none;
 }
