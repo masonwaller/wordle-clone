@@ -1,13 +1,14 @@
 import React from "react";
 import "./GridBox.css";
 
-function GridBox({ boxEnabled, id }) {
+function GridBox({ id, letter }) {
   return (
     <div className="grid-box">
       <input
         className="box-input"
         type="text"
-        disabled={boxEnabled}
+        disabled
+        value={letter}
         id={id}
         maxLength={1}
       />
