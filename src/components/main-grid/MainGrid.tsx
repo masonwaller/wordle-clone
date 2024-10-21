@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React from "react";
 import "./MainGrid.css";
 import GridRow from "../grid-row/GridRow.tsx";
 
-function MasonGrid() {
-  const [rowOne, setRowOne] = useState(["A", "B", "C", "D"]);
-  const [rowTow, setRowTwo] = useState([]);
-  const [rowThree, setRowThree] = useState([]);
-  const [rowFour, setRowFour] = useState([]);
-  const [rowFive, setRowFive] = useState([]);
-  const [rowSix, setRowSix] = useState([]);
+function MasonGrid({ rowOne, rowTow, rowThree, rowFour, rowFive, rowSix }) {
   return (
     <div className="main-grid">
       <GridRow row={1} rowLetters={rowOne} />
