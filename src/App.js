@@ -4,6 +4,8 @@ import "./App.css";
 import MainGrid from "./components/main-grid/MainGrid.tsx";
 
 function App() {
+  const [word, setWord] = useState("hello");
+
   const [currentRow, setCurrentRow] = useState(1);
 
   const [rowOne, setRowOne] = useState([]);
@@ -50,11 +52,19 @@ function App() {
 
     switch (key) {
       case "Enter":
-        // Check if the current row is 6
         if (rowToEdit.length === 5) {
-          setCurrentRow(currentRow + 1);
-        } else {
-          console.log("Row is not full");
+          // Check if the word is correct
+          if (rowToEdit.join("") === word) {
+            console.log("Correct");
+          } else {
+            console.log("Incorrect");
+          }
+
+          if (currentRow === 6) {
+            console.log("Game Over");
+          } else {
+            setCurrentRow(currentRow + 1);
+          }
         }
         break;
       default:
