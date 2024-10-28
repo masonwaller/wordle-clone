@@ -67,6 +67,11 @@ function App() {
           }
         }
         break;
+      case "Backspace":
+        if (rowToEdit.length > 0) {
+          rowToEditFunction(rowToEdit.slice(0, -1));
+        }
+        break;
       default:
         if (rowToEdit.length < 5) {
           rowToEditFunction([...rowToEdit, key]);
