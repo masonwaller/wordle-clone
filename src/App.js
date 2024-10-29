@@ -5,9 +5,7 @@ import MainGrid from "./components/main-grid/MainGrid.tsx";
 import { words } from "./constants/words.ts";
 
 function App() {
-  const [word, setWord] = useState(
-    words[Math.floor(Math.random() * words.length)]
-  );
+  const [word, setWord] = useState("hello");
 
   const [currentRow, setCurrentRow] = useState(1);
 
@@ -17,6 +15,43 @@ function App() {
   const [rowFour, setRowFour] = useState([]);
   const [rowFive, setRowFive] = useState([]);
   const [rowSix, setRowSix] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("wordle")) {
+      const wordle = JSON.parse(localStorage.getItem("wordle"));
+      console.log(wordle);
+      if (wordle.day === new Date().valueOf()) {
+        //TODO: change to check by date not timestamp
+        setWord(wordle.word);
+        setRowOne(wordle.rowOne);
+        setRowTwo(wordle.rowTwo);
+        setRowThree(wordle.rowThree);
+        setRowFour(wordle.rowFour);
+        setRowFive(wordle.rowFive);
+        setRowSix(wordle.rowSix);
+        setCurrentRow(wordle.currentRow);
+      } else {
+        localStorage.removeItem("wordle");
+      }
+    } else {
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      setWord(randomWord);
+      localStorage.setItem(
+        "wordle",
+        JSON.stringify({
+          day: new Date().valueOf(),
+          word: randomWord,
+          rowOne: [],
+          rowTwo: [],
+          rowThree: [],
+          rowFour: [],
+          rowFive: [],
+          rowSix: [],
+          currentRow: 1,
+        })
+      );
+    }
+  }, []);
 
   const keyPressEvent = (event) => {
     // Get the pressed key
@@ -57,6 +92,20 @@ function App() {
       case "Enter":
         if (rowToEdit.length === 5) {
           // Check if the word is correct
+          localStorage.setItem(
+            "wordle",
+            JSON.stringify({
+              day: new Date().valueOf(),
+              word: word,
+              rowOne: rowOne,
+              rowTwo: rowTwo,
+              rowThree: rowThree,
+              rowFour: rowFour,
+              rowFive: rowFive,
+              rowSix: rowSix,
+              currentRow: currentRow + 1,
+            })
+          );
           if (rowToEdit.join("") === word) {
             console.log("Correct");
           } else {
