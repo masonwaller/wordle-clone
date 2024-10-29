@@ -2,9 +2,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import MainGrid from "./components/main-grid/MainGrid.tsx";
+import { words } from "./constants/words.ts";
 
 function App() {
-  const [word, setWord] = useState("hello");
+  const [word, setWord] = useState(
+    words[Math.floor(Math.random() * words.length)]
+  );
 
   const [currentRow, setCurrentRow] = useState(1);
 
