@@ -20,7 +20,6 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("wordle")) {
       const wordle = JSON.parse(localStorage.getItem("wordle"));
-      console.log(wordle);
       if (wordle.day === dayjs().format("YYYY-MM-DD")) {
         //TODO: change to check by date not timestamp
         setWord(wordle.word);
