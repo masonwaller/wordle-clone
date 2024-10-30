@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import MainGrid from "./components/main-grid/MainGrid.tsx";
 import { words } from "./constants/words.ts";
+import dayjs from "dayjs";
 
 function App() {
   const [word, setWord] = useState("hello");
@@ -20,7 +21,7 @@ function App() {
     if (localStorage.getItem("wordle")) {
       const wordle = JSON.parse(localStorage.getItem("wordle"));
       console.log(wordle);
-      if (wordle.day === new Date().valueOf()) {
+      if (wordle.day === dayjs().format("YYYY-MM-DD")) {
         //TODO: change to check by date not timestamp
         setWord(wordle.word);
         setRowOne(wordle.rowOne);
@@ -39,7 +40,7 @@ function App() {
       localStorage.setItem(
         "wordle",
         JSON.stringify({
-          day: new Date().valueOf(),
+          day: dayjs().format("YYYY-MM-DD"),
           word: randomWord,
           rowOne: [],
           rowTwo: [],
@@ -95,7 +96,7 @@ function App() {
           localStorage.setItem(
             "wordle",
             JSON.stringify({
-              day: new Date().valueOf(),
+              day: dayjs().format("YYYY-MM-DD"),
               word: word,
               rowOne: rowOne,
               rowTwo: rowTwo,
