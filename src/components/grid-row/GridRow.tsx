@@ -5,11 +5,36 @@ import GridBox from "../grid-box/GridBox.tsx";
 function GridRow({ row, rowLetters }) {
   return (
     <div className="grid-row">
-      <GridBox letter={rowLetters[0] || ""} id={`row${row}-box0`} />
-      <GridBox letter={rowLetters[1] || ""} id={`row${row}-box1`} />
-      <GridBox letter={rowLetters[2] || ""} id={`row${row}-box2`} />
-      <GridBox letter={rowLetters[3] || ""} id={`row${row}-box3`} />
-      <GridBox letter={rowLetters[4] || ""} id={`row${row}-box4`} />
+      <GridBox
+        letterInfo={
+          rowLetters[0] || { letter: "", color: "rgb(248, 244, 244)" }
+        }
+        id={`row${row}-box0`}
+      />
+      <GridBox
+        letterInfo={
+          rowLetters[1] || { letter: "", color: "rgb(248, 244, 244)" }
+        }
+        id={`row${row}-box1`}
+      />
+      <GridBox
+        letterInfo={
+          rowLetters[2] || { letter: "", color: "rgb(248, 244, 244)" }
+        }
+        id={`row${row}-box2`}
+      />
+      <GridBox
+        letterInfo={
+          rowLetters[3] || { letter: "", color: "rgb(248, 244, 244)" }
+        }
+        id={`row${row}-box3`}
+      />
+      <GridBox
+        letterInfo={
+          rowLetters[4] || { letter: "", color: "rgb(248, 244, 244)" }
+        }
+        id={`row${row}-box4`}
+      />
     </div>
   );
 }

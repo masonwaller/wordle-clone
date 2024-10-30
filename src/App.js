@@ -126,7 +126,10 @@ function App() {
         break;
       default:
         if (rowToEdit.length < 5) {
-          rowToEditFunction([...rowToEdit, key]);
+          rowToEditFunction([
+            ...rowToEdit,
+            { letter: key, color: `rgb(248, 244, 244)` },
+          ]);
         }
         break;
     }
