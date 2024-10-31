@@ -20,8 +20,8 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("wordle")) {
       const wordle = JSON.parse(localStorage.getItem("wordle"));
+      console.log(wordle);
       if (wordle.day === dayjs().format("YYYY-MM-DD")) {
-        //TODO: change to check by date not timestamp
         setWord(wordle.word);
         setRowOne(wordle.rowOne);
         setRowTwo(wordle.rowTwo);
@@ -53,7 +53,26 @@ function App() {
     }
   }, []);
 
-  const keyPressEvent = (event) => {
+  const checkIfCorrect = async (rowToCheck, rowToEditFunction) => {
+    const wordArray = word.split("");
+    const rowArray = rowToCheck.map((letter) => letter.letter);
+    const newRowArray = [];
+    const correctLetters = rowArray.filter((letter, index) => {
+      if (letter === wordArray[index]) {
+        newRowArray.push({ letter: letter, color: `green` });
+        return letter;
+      } else {
+        newRowArray.push({ letter: letter, color: `rgb(255, 0, 0)` });
+      }
+    });
+    rowToEditFunction(newRowArray);
+    if (correctLetters.length === 5) {
+      setCurrentRow(7);
+      return true;
+    }
+  };
+
+  const keyPressEvent = async (event) => {
     // Get the pressed key
     const key = event.key;
 
@@ -92,6 +111,18 @@ function App() {
       case "Enter":
         if (rowToEdit.length === 5) {
           // Check if the word is correct
+          if (await checkIfCorrect(rowToEdit, rowToEditFunction)) {
+            console.log("Correct");
+          } else {
+            console.log("Incorrect");
+          }
+
+          if (currentRow === 6) {
+            console.log("Game Over");
+          } else {
+            setCurrentRow(currentRow + 1);
+          }
+          //TODO: check to see if this is working, need to check if game disables after user gets the word correct
           localStorage.setItem(
             "wordle",
             JSON.stringify({
@@ -106,17 +137,6 @@ function App() {
               currentRow: currentRow + 1,
             })
           );
-          if (rowToEdit.join("") === word) {
-            console.log("Correct");
-          } else {
-            console.log("Incorrect");
-          }
-
-          if (currentRow === 6) {
-            console.log("Game Over");
-          } else {
-            setCurrentRow(currentRow + 1);
-          }
         }
         break;
       case "Backspace":
