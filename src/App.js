@@ -10,25 +10,26 @@ function App() {
 
   const [currentRow, setCurrentRow] = useState(1);
 
-  const [rowOne, setRowOne] = useState([]);
-  const [rowTwo, setRowTwo] = useState([]);
-  const [rowThree, setRowThree] = useState([]);
-  const [rowFour, setRowFour] = useState([]);
-  const [rowFive, setRowFive] = useState([]);
-  const [rowSix, setRowSix] = useState([]);
+  const [row1, setRow1] = useState([]);
+  const [row2, setRow2] = useState([]);
+  const [row3, setRow3] = useState([]);
+  const [row4, setRow4] = useState([]);
+  const [row5, setRow5] = useState([]);
+  const [row6, setRow6] = useState([]);
 
   useEffect(() => {
+    // localStorage.removeItem("wordle");
     if (localStorage.getItem("wordle")) {
       const wordle = JSON.parse(localStorage.getItem("wordle"));
       console.log(wordle);
       if (wordle.day === dayjs().format("YYYY-MM-DD")) {
         setWord(wordle.word);
-        setRowOne(wordle.rowOne);
-        setRowTwo(wordle.rowTwo);
-        setRowThree(wordle.rowThree);
-        setRowFour(wordle.rowFour);
-        setRowFive(wordle.rowFive);
-        setRowSix(wordle.rowSix);
+        setRow1(wordle.row1);
+        setRow2(wordle.row2);
+        setRow3(wordle.row3);
+        setRow4(wordle.row4);
+        setRow5(wordle.row5);
+        setRow6(wordle.row6);
         setCurrentRow(wordle.currentRow);
       } else {
         localStorage.removeItem("wordle");
@@ -41,19 +42,19 @@ function App() {
         JSON.stringify({
           day: dayjs().format("YYYY-MM-DD"),
           word: randomWord,
-          rowOne: [],
-          rowTwo: [],
-          rowThree: [],
-          rowFour: [],
-          rowFive: [],
-          rowSix: [],
+          row1: [],
+          row2: [],
+          row3: [],
+          row4: [],
+          row5: [],
+          row6: [],
           currentRow: 1,
         })
       );
     }
   }, []);
 
-  const checkIfCorrect = async (rowToCheck, rowToEditFunction) => {
+  const checkIfCorrect = async (rowToCheck) => {
     const wordArray = word.split("");
     const rowArray = rowToCheck.map((letter) => letter.letter);
     const newRowArray = [];
@@ -62,14 +63,14 @@ function App() {
         newRowArray.push({ letter: letter, color: `green` });
         return letter;
       } else {
-        newRowArray.push({ letter: letter, color: `rgb(255, 0, 0)` });
+        newRowArray.push({ letter: letter, color: `red` });
       }
     });
-    rowToEditFunction(newRowArray);
+    // rowToEditFunction(newRowArray);
     if (correctLetters.length === 5) {
-      setCurrentRow(7);
-      return true;
+      return { correct: true, newRow: newRowArray };
     }
+    return { correct: false, newRow: newRowArray };
   };
 
   const keyPressEvent = async (event) => {
@@ -80,63 +81,65 @@ function App() {
     let rowToEditFunction;
     switch (currentRow) {
       case 1:
-        rowToEdit = rowOne;
-        rowToEditFunction = setRowOne;
+        rowToEdit = row1;
+        rowToEditFunction = setRow1;
         break;
       case 2:
-        rowToEdit = rowTwo;
-        rowToEditFunction = setRowTwo;
+        rowToEdit = row2;
+        rowToEditFunction = setRow2;
         break;
       case 3:
-        rowToEdit = rowThree;
-        rowToEditFunction = setRowThree;
+        rowToEdit = row3;
+        rowToEditFunction = setRow3;
         break;
       case 4:
-        rowToEdit = rowFour;
-        rowToEditFunction = setRowFour;
+        rowToEdit = row4;
+        rowToEditFunction = setRow4;
         break;
       case 5:
-        rowToEdit = rowFive;
-        rowToEditFunction = setRowFive;
+        rowToEdit = row5;
+        rowToEditFunction = setRow5;
         break;
       case 6:
-        rowToEdit = rowSix;
-        rowToEditFunction = setRowSix;
+        rowToEdit = row6;
+        rowToEditFunction = setRow6;
         break;
       default:
-        break;
+        return;
     }
 
     switch (key) {
       case "Enter":
         if (rowToEdit.length === 5) {
           // Check if the word is correct
-          if (await checkIfCorrect(rowToEdit, rowToEditFunction)) {
+          const { correct, newRow } = await checkIfCorrect(
+            rowToEdit,
+            rowToEditFunction
+          );
+          rowToEditFunction(newRow);
+          let newCurrentRow = currentRow;
+          const newStorageItem = {
+            day: dayjs().format("YYYY-MM-DD"),
+            word: word,
+            row1: row1,
+            row2: row2,
+            row3: row3,
+            row4: row4,
+            row5: row5,
+            row6: row6,
+            currentRow: newCurrentRow + 1,
+          };
+          newStorageItem[`row${currentRow}`] = newRow;
+          if (correct) {
             console.log("Correct");
+            newCurrentRow = 7;
           } else {
             console.log("Incorrect");
-          }
-
-          if (currentRow === 6) {
-            console.log("Game Over");
-          } else {
-            setCurrentRow(currentRow + 1);
+            newCurrentRow += 1;
           }
           //TODO: check to see if this is working, need to check if game disables after user gets the word correct
-          localStorage.setItem(
-            "wordle",
-            JSON.stringify({
-              day: dayjs().format("YYYY-MM-DD"),
-              word: word,
-              rowOne: rowOne,
-              rowTwo: rowTwo,
-              rowThree: rowThree,
-              rowFour: rowFour,
-              rowFive: rowFive,
-              rowSix: rowSix,
-              currentRow: currentRow + 1,
-            })
-          );
+          setCurrentRow(newCurrentRow);
+          localStorage.setItem("wordle", JSON.stringify(newStorageItem));
         }
         break;
       case "Backspace":
@@ -159,12 +162,12 @@ function App() {
     <div className="App" onKeyDown={keyPressEvent} tabIndex="0">
       <h1>Mason's Wordle</h1>
       <MainGrid
-        rowOne={rowOne}
-        rowTwo={rowTwo}
-        rowThree={rowThree}
-        rowFour={rowFour}
-        rowFive={rowFive}
-        rowSix={rowSix}
+        row1={row1}
+        row2={row2}
+        row3={row3}
+        row4={row4}
+        row5={row5}
+        row6={row6}
       />
     </div>
   );
