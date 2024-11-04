@@ -118,6 +118,13 @@ function App() {
           );
           rowToEditFunction(newRow);
           let newCurrentRow = currentRow;
+          if (correct) {
+            console.log("Correct");
+            newCurrentRow = 7;
+          } else {
+            console.log("Incorrect");
+            newCurrentRow += 1;
+          }
           const newStorageItem = {
             day: dayjs().format("YYYY-MM-DD"),
             word: word,
@@ -127,16 +134,9 @@ function App() {
             row4: row4,
             row5: row5,
             row6: row6,
-            currentRow: newCurrentRow + 1,
+            currentRow: newCurrentRow,
           };
           newStorageItem[`row${currentRow}`] = newRow;
-          if (correct) {
-            console.log("Correct");
-            newCurrentRow = 7;
-          } else {
-            console.log("Incorrect");
-            newCurrentRow += 1;
-          }
           //TODO: check to see if this is working, need to check if game disables after user gets the word correct
           setCurrentRow(newCurrentRow);
           localStorage.setItem("wordle", JSON.stringify(newStorageItem));
