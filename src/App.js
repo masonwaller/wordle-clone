@@ -4,6 +4,8 @@ import "./App.css";
 import MainGrid from "./components/main-grid/MainGrid.tsx";
 import { words } from "./constants/words.ts";
 import dayjs from "dayjs";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
 
 function App() {
   const [word, setWord] = useState("hello");
@@ -75,7 +77,7 @@ function App() {
 
   const keyPressEvent = async (event) => {
     // Get the pressed key
-    const key = event.key;
+    const key = event.key || event;
 
     let rowToEdit;
     let rowToEditFunction;
@@ -110,6 +112,7 @@ function App() {
 
     switch (key) {
       case "Enter":
+      case "{enter}":
         if (rowToEdit.length === 5) {
           // Check if the word is correct
           const { correct, newRow } = await checkIfCorrect(
@@ -143,6 +146,7 @@ function App() {
         }
         break;
       case "Backspace":
+      case "{bksp}":
         if (rowToEdit.length > 0) {
           rowToEditFunction(rowToEdit.slice(0, -1));
         }
@@ -158,6 +162,10 @@ function App() {
     }
   };
 
+  const onKeyboardPress = (button) => {
+    console.log("Button pressed", button);
+  };
+
   return (
     <div className="App" onKeyDown={keyPressEvent} tabIndex="0">
       <h1>Mason's Wordle</h1>
@@ -169,6 +177,7 @@ function App() {
         row5={row5}
         row6={row6}
       />
+      <Keyboard onKeyPress={keyPressEvent} />
     </div>
   );
 }
