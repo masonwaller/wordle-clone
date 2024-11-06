@@ -177,7 +177,9 @@ function App() {
         row5={row5}
         row6={row6}
       />
-      <Keyboard onKeyPress={keyPressEvent} />
+      <div style={{ width: "70%" }}>
+        <Keyboard onKeyPress={keyPressEvent} />
+      </div>
     </div>
   );
 }
