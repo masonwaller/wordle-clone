@@ -6,6 +6,7 @@ import { words } from "./constants/words.ts";
 import dayjs from "dayjs";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
+import { keyboardExclusions } from "./constants/keyboardExclusions.ts";
 
 function App() {
   const [word, setWord] = useState("hello");
@@ -180,60 +181,7 @@ function App() {
       <div style={{ width: "70%" }}>
         <Keyboard
           onKeyPress={keyPressEvent}
-          excludeFromLayout={{
-            default: [
-              "@",
-              ".com",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "0",
-              "`",
-              "-",
-              `=`,
-              "space",
-              "[",
-              "]",
-              "\\",
-              ";",
-              "'",
-              ",",
-              ".",
-              "/",
-            ],
-            shift: [
-              "@",
-              ".com",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "0",
-              "`",
-              "-",
-              `=`,
-              "space",
-              "[",
-              "]",
-              "\\",
-              ";",
-              "'",
-              ",",
-              ".",
-              "/",
-            ],
-          }}
+          excludeFromLayout={keyboardExclusions}
         />
       </div>
     </div>
