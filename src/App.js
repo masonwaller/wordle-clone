@@ -7,9 +7,11 @@ import dayjs from "dayjs";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import { keyboardExclusions } from "./constants/keyboardExclusions.ts";
+import GameOverDialog from "./components/end-game/GameOverDialog.tsx";
 
 function App() {
   const [word, setWord] = useState("hello");
+  const [correctlyGuessed, setCorrectlyGuessed] = useState(false);
 
   const [currentRow, setCurrentRow] = useState(1);
 
@@ -124,6 +126,7 @@ function App() {
           let newCurrentRow = currentRow;
           if (correct) {
             console.log("Correct");
+            setCorrectlyGuessed(true);
             newCurrentRow = 7;
           } else {
             console.log("Incorrect");
@@ -169,6 +172,7 @@ function App() {
 
   return (
     <div className="App" onKeyDown={keyPressEvent} tabIndex="0">
+      {currentRow >= 7 && <GameOverDialog />}
       <h1>Mason's Wordle</h1>
       <MainGrid
         row1={row1}
