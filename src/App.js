@@ -172,7 +172,7 @@ function App() {
 
   return (
     <div className="App" onKeyDown={keyPressEvent} tabIndex="0">
-      {currentRow >= 7 && <GameOverDialog />}
+      {currentRow >= 7 && <GameOverDialog won={correctlyGuessed} word={word} />}
       <h1>Mason's Wordle</h1>
       <MainGrid
         row1={row1}

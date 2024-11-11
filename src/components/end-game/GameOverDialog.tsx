@@ -7,9 +7,9 @@ export default function GameOverDialog({ won, word }) {
   return (
     <div className="game-over-dialog">
       {won ? (
-        <h1>Success, the word was ${word}</h1>
+        <h1>Success, the word was {word}</h1>
       ) : (
-        <h1>Game Over, the word was ${word}</h1>
+        <h1>Game Over, the word was {word}</h1>
       )}
     </div>
   );
