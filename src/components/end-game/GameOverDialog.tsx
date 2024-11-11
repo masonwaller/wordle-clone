@@ -6,6 +6,7 @@ import "./GameOverDialog.css";
 export default function GameOverDialog({ won, word }) {
   return (
     <div className="game-over-dialog">
+      {/* add x button to close dialog */}
       {won ? (
         <h1>Success, the word was {word}</h1>
       ) : (
