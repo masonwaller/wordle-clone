@@ -10,5 +10,13 @@
   height: 100%;
   background-color: white;
   z-index: 100;
+}
+
+.message {
   padding-top: 100px;
+}
+
+.close-button {
+  font-size: 30px;
+  right: 30px;
 }
