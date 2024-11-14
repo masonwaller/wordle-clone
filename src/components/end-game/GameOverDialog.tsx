@@ -12,7 +12,7 @@ export default function GameOverDialog({ won, word }) {
         {won ? (
           <h1>Success, the word was {word}</h1>
         ) : (
-          <h1>Game Over, the word was {word}</h1>
+          <h1>Game Over, the word was {word}. Better luck next time!</h1>
         )}
       </div>
     </div>
