@@ -6,10 +6,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   background-color: white;
   z-index: 100;
+  padding: 0px 5vw;
 }
 
 .message {
@@ -17,6 +18,7 @@
 }
 
 .close-button {
+  align-self: flex-end;
   font-size: 30px;
   right: 30px;
 }
