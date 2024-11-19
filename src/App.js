@@ -43,6 +43,7 @@ function App() {
         setRow5(wordle.row5);
         setRow6(wordle.row6);
         setCurrentRow(wordle.currentRow);
+        setCorrectlyGuessed(wordle.correctlyGuessed);
       } else {
         localStorage.removeItem("wordle");
       }
@@ -61,6 +62,7 @@ function App() {
           row5: [],
           row6: [],
           currentRow: 1,
+          correctlyGuessed,
         })
       );
     }
@@ -149,6 +151,7 @@ function App() {
             row5: row5,
             row6: row6,
             currentRow: newCurrentRow,
+            correctlyGuessed: correct,
           };
           newStorageItem[`row${currentRow}`] = newRow;
           //TODO: check to see if this is working, need to check if game disables after user gets the word correct
