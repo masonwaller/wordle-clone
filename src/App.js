@@ -14,6 +14,7 @@ function App() {
   const [correctlyGuessed, setCorrectlyGuessed] = useState(false);
 
   const [currentRow, setCurrentRow] = useState(1);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const [row1, setRow1] = useState([]);
   const [row2, setRow2] = useState([]);
@@ -21,6 +22,12 @@ function App() {
   const [row4, setRow4] = useState([]);
   const [row5, setRow5] = useState([]);
   const [row6, setRow6] = useState([]);
+
+  useEffect(() => {
+    if (currentRow >= 7) {
+      setDialogOpen(true);
+    }
+  }, [currentRow]);
 
   useEffect(() => {
     // localStorage.removeItem("wordle");
@@ -166,13 +173,15 @@ function App() {
     }
   };
 
-  const onKeyboardPress = (button) => {
-    console.log("Button pressed", button);
-  };
-
   return (
     <div className="App" onKeyDown={keyPressEvent} tabIndex="0">
-      {currentRow >= 7 && <GameOverDialog won={correctlyGuessed} word={word} />}
+      {dialogOpen && (
+        <GameOverDialog
+          won={correctlyGuessed}
+          word={word}
+          closeDialog={() => setDialogOpen(false)}
+        />
+      )}
       <h1>Mason's Wordle</h1>
       <MainGrid
         row1={row1}
