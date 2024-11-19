@@ -3,11 +3,13 @@
 import React from "react";
 import "./GameOverDialog.css";
 
-export default function GameOverDialog({ won, word }) {
+export default function GameOverDialog({ won, word, closeDialog }) {
   return (
     <div className="game-over-dialog">
       {/* TODO: fix css on closing tag */}
-      <div className="close-button">X</div>
+      <div className="close-button" onClick={closeDialog}>
+        X
+      </div>
       <div className="message">
         {won ? (
           <h1>Success, the word was {word}</h1>
