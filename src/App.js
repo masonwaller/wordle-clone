@@ -125,7 +125,6 @@ function App() {
 
     switch (key) {
       case "Enter":
-      case "{enter}":
         if (rowToEdit.length === 5) {
           // Check if the word is correct
           const { correct, newRow } = await checkIfCorrect(
@@ -161,7 +160,6 @@ function App() {
         }
         break;
       case "Backspace":
-      case "{bksp}":
         if (rowToEdit.length > 0) {
           rowToEditFunction(rowToEdit.slice(0, -1));
         }
