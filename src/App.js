@@ -90,6 +90,15 @@ function App() {
   const keyPressEvent = async (event) => {
     console.log(event);
     // Get the pressed key
+    if (event.keyCode) {
+      if (
+        (event.keyCode < 65 || event.keyCode > 90) &&
+        event.keyCode !== 13 &&
+        event.keyCode !== 8
+      ) {
+        return;
+      }
+    }
     const key = event.key || event;
 
     let rowToEdit;
