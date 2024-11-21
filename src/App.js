@@ -76,6 +76,8 @@ function App() {
       if (letter === wordArray[index]) {
         newRowArray.push({ letter: letter, color: `green` });
         return letter;
+      } else if (wordArray.includes(letter)) {
+        newRowArray.push({ letter: letter, color: `yellow` });
       } else {
         newRowArray.push({ letter: letter, color: `red` });
       }
