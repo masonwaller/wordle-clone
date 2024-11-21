@@ -88,7 +88,6 @@ function App() {
   };
 
   const keyPressEvent = async (event) => {
-    console.log(event);
     // Get the pressed key
     if (event.keyCode) {
       if (
