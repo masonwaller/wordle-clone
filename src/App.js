@@ -71,7 +71,7 @@ function App() {
 
   const checkIfCorrect = async (rowToCheck) => {
     const wordArray = word.split("");
-    const rowArray = rowToCheck.map((letter) => letter.letter);
+    const rowArray = rowToCheck.map((letter) => letter.letter.toLowerCase());
     const newRowArray = [];
     const correctLetters = rowArray.filter((letter, index) => {
       if (letter === wordArray[index]) {
