@@ -21,4 +21,7 @@
   align-self: flex-end;
   font-size: 30px;
   right: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 0px 5px 0px 5px;
 }
