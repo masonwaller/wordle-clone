@@ -1,5 +1,3 @@
-// create a full screen dialog component that will be displayed when the game is over
-
 import React from "react";
 import "./GameOverDialog.css";
 
