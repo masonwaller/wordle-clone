@@ -8,6 +8,7 @@ import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import { keyboardExclusions } from "./constants/keyboardExclusions.ts";
 import GameOverDialog from "./components/end-game/GameOverDialog.tsx";
+import AdBox from "./components/ad-box/AdBox.tsx";
 
 function App() {
   const [word, setWord] = useState("hello");
@@ -195,15 +196,26 @@ function App() {
           closeDialog={() => setDialogOpen(false)}
         />
       )}
-      <h1>Mason's Wordle</h1>
-      <MainGrid
-        row1={row1}
-        row2={row2}
-        row3={row3}
-        row4={row4}
-        row5={row5}
-        row6={row6}
-      />
+      <div style={{ display: "grid", width: "100%", gridAutoFlow: "column" }}>
+        <AdBox />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <h1 style={{ width: "42.5%" }}>Mason's Wordle</h1>
+          <MainGrid
+            row1={row1}
+            row2={row2}
+            row3={row3}
+            row4={row4}
+            row5={row5}
+            row6={row6}
+          />
+        </div>
+      </div>
       <div
         style={{ width: "70%", border: "2px solid black", borderRadius: "5px" }}
       >
