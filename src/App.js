@@ -196,33 +196,29 @@ function App() {
           closeDialog={() => setDialogOpen(false)}
         />
       )}
-      <div style={{ display: "grid", width: "100%", gridAutoFlow: "column" }}>
-        <AdBox />
+      <AdBox />
+      <div className="Main-App">
+        <h1>Mason's Wordle</h1>
+        <MainGrid
+          row1={row1}
+          row2={row2}
+          row3={row3}
+          row4={row4}
+          row5={row5}
+          row6={row6}
+        />
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            width: "70%",
+            border: "2px solid black",
+            borderRadius: "5px",
           }}
         >
-          <h1 style={{ width: "42.5%" }}>Mason's Wordle</h1>
-          <MainGrid
-            row1={row1}
-            row2={row2}
-            row3={row3}
-            row4={row4}
-            row5={row5}
-            row6={row6}
+          <Keyboard
+            onKeyPress={keyPressEvent}
+            excludeFromLayout={keyboardExclusions}
           />
         </div>
-      </div>
-      <div
-        style={{ width: "70%", border: "2px solid black", borderRadius: "5px" }}
-      >
-        <Keyboard
-          onKeyPress={keyPressEvent}
-          excludeFromLayout={keyboardExclusions}
-        />
       </div>
     </div>
   );
