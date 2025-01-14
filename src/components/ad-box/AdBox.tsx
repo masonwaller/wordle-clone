@@ -7,14 +7,21 @@ export default class AdBox extends React.Component {
     return (
       <div
         style={{
-          height: "300px",
           width: "150px",
-          backgroundColor: "blue",
           justifySelf: "flex-start",
           alignSelf: "center",
         }}
       >
-        <h1 style={{ color: "white" }}>This is an ad</h1>
+        <img
+          src="https://digitalsynopsis.com/wp-content/uploads/2023/12/creative-ads-coke-long-can.jpg"
+          alt="ad"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+        <img
+          src="https://play-lh.googleusercontent.com/VDz7x1HwI4IvqCoTU_wM2Ht6eHeEGauuNxvht2pPd_FroXHuKplnFPDd4S1XaIZ9dQs=w480-h960-rw"
+          alt="ad"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
       </div>
     );
   }
