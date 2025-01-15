@@ -73,21 +73,28 @@ function App() {
   const checkIfCorrect = async (rowToCheck) => {
     const wordArray = word.split("");
     const rowArray = rowToCheck.map((letter) => letter.letter.toLowerCase());
-    const newRowArray = [];
+    const newRowArray = ["", "", "", "", ""];
     const correctLetters = rowArray.filter((letter, index) => {
       if (letter === wordArray[index]) {
-        newRowArray.push({ letter: letter, color: `green` });
+        newRowArray[index] = { letter: letter, color: `green` };
+        wordArray.splice(index, 1, " ");
         return letter;
-      } else if (wordArray.join("").includes(letter)) {
-        newRowArray.push({ letter: letter, color: `yellow` });
-      } else {
-        newRowArray.push({ letter: letter, color: `red` });
       }
     });
-    // rowToEditFunction(newRowArray);
     if (correctLetters.length === 5) {
       return { correct: true, newRow: newRowArray };
     }
+    const correctLettersWrongSpot = rowArray.filter(async (letter, index) => {
+      if (newRowArray[index] !== "") {
+        return letter;
+      } else if (wordArray.join("").includes(letter)) {
+        newRowArray[index] = { letter: letter, color: `yellow` };
+        const idx = wordArray.findIndex((wordLetter) => wordLetter === letter);
+        wordArray.splice(idx, 1, " ");
+      } else {
+        newRowArray[index] = { letter: letter, color: `red` };
+      }
+    });
     return { correct: false, newRow: newRowArray };
   };
 
