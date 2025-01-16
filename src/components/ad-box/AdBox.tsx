@@ -18,7 +18,7 @@ export default class AdBox extends React.Component {
           style={{ maxWidth: "100%", maxHeight: "100%" }}
         />
         <img
-          src="https://play-lh.googleusercontent.com/VDz7x1HwI4IvqCoTU_wM2Ht6eHeEGauuNxvht2pPd_FroXHuKplnFPDd4S1XaIZ9dQs=w480-h960-rw"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxEH4R6LeHS7WKhYsspRTyEXWChHNJC1RLcQ&s"
           alt="ad"
           style={{ maxWidth: "100%", maxHeight: "100%" }}
         />
