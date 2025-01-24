@@ -12,6 +12,12 @@
   margin-bottom: 20px;
 }
 
+.keyboard-container {
+  width: 70%;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -214,13 +214,7 @@ function App() {
           row5={row5}
           row6={row6}
         />
-        <div
-          style={{
-            width: "70%",
-            border: "2px solid black",
-            borderRadius: "5px",
-          }}
-        >
+        <div className="keyboard-container">
           <Keyboard
             onKeyPress={keyPressEvent}
             excludeFromLayout={keyboardExclusions}
