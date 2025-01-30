@@ -34,7 +34,7 @@ function App() {
     // localStorage.removeItem("wordle");
     if (localStorage.getItem("wordle")) {
       const wordle = JSON.parse(localStorage.getItem("wordle"));
-      console.log(wordle);
+      // console.log(wordle);
       if (wordle.day === dayjs().format("YYYY-MM-DD")) {
         setWord(wordle.word);
         setRow1(wordle.row1);
